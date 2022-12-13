@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
       ),
       theme: ThemeData(
         useMaterial3: true,
-        fontFamily: 'Manrope-bold',
         scaffoldBackgroundColor: Color(0xFFF5F5F9),
         textTheme: TextThemes.lightTextTheme,
         colorScheme: ColorSchemes.lightColorScheme,

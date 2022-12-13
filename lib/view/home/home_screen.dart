@@ -57,16 +57,58 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             if (snapshot.data!.isEmpty) {
-                              return const EmptyWidget();
+                              return EmptyWidget(
+                                titleController: _titleController,
+                                subtitleController: _subtitleController,
+                              );
                             } else {
                               return ListView(
-                                physics: NeverScrollableScrollPhysics(),
                                 children: [
                                   Image.asset(
                                     'assets/images/home.png',
                                     height: 260.h,
                                   ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AddItemWidget(
+                                              title: _titleController,
+                                              subtitle: _subtitleController,
+                                            );
+                                          });
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 10.h, horizontal: 10.w),
+                                      decoration: BoxDecoration(
+                                          color: AppConstants.grey,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.add,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          TextUtils(
+                                            text: 'New Item',
+                                            fontSize: 20.sp,
+                                            color: Colors.white,
+                                            // color: Colors.blueGrey[800],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                   ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount: snapshot.data!.length,
                                     itemBuilder: (context, index) {
@@ -189,21 +231,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                   )),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AddItemWidget(
-                          title: _titleController,
-                          subtitle: _subtitleController,
-                        );
-                      });
-                },
-                child: const Icon(Icons.add),
-              ),
             );
           });
     });

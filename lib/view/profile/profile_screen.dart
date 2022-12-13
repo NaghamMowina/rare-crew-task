@@ -7,6 +7,8 @@ import 'package:rare_task/view/auth/screens/login/login_screen.dart';
 import 'package:rare_task/viewModel/auth_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../res/text_widget.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -23,49 +25,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
           minTextAdapt: true,
           splitScreenMode: true,
           builder: (context, child) {
-            return Center(
-              child: Padding(
-                padding: EdgeInsets.all(10.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/images/prof.png'),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Row(
-                      children: [
-                        Card(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.email),
-                        )),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        Expanded(
-                          child: Text(
-                            viewModel.email!,
-                            style: TextStyle(
-                                fontSize: 20.sp, fontWeight: FontWeight.bold),
+            return Scaffold(
+              appBar: AppBar(
+                title: TextUtils(text: 'Profile'),
+                centerTitle: true,
+              ),
+              body: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(10.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/prof.png'),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Row(
+                        children: [
+                          Card(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(Icons.email),
+                          )),
+                          SizedBox(
+                            width: 10.w,
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    ElevatedButton(
-                        onPressed: () async {
-                          viewModel.logOut(context);
-                        },
-                        child: Icon(
-                          Icons.logout,
-                          size: 35,
-                        ))
-                  ],
+                          Expanded(
+                            child: Text(
+                              viewModel.email!,
+                              style: TextStyle(
+                                  fontSize: 20.sp, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      ElevatedButton(
+                          onPressed: () async {
+                            viewModel.logOut(context);
+                          },
+                          child: Icon(
+                            Icons.logout,
+                            size: 35,
+                          ))
+                    ],
+                  ),
                 ),
               ),
             );
